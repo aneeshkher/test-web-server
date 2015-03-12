@@ -1,0 +1,55 @@
+<?php
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+//$target_directory = "/var/www/html/";
+$target_directory = "/var/www/html/uploaded/";
+$target_file_name = $target_directory.basename($_FILES["uploadedFile"]["name"]);
+//$target_file_name = $target_directory;
+$uploadOK=1;
+$fileType = pathinfo($target_file_name, PATHINFO_EXTENSION);
+
+if (isset($_POST["submit"])) {
+	//$size = filesize ($_FILES["uploadedFile"]["size"]);
+	//if ($_FILES['uploadedFile']['name'] != "") {}
+	?>
+	<p> <?php echo "File type - ".$_FILES['uploadedFile']['type']."\xA"; ?> </p>
+	<p> <?php echo "File size - ".$_FILES['uploadedFile']['size']; ?> </p>
+	<p> <?php echo "File name - ".$_FILES['uploadedFile']['name']; ?> </p>
+	<p> <?php echo "File temp - ".$_FILES['uploadedFile']['tmp_name']; ?> </p>
+	<p> <?php echo "File err - ".$_FILES['uploadedFile']['error']; ?> </p>
+	<?php
+	$temporary_file = $_FILES['uploadedFile']['tmp_name'];
+	print ("Target file name: $target_file_name");
+	?>
+	<p><?php print ("VAR DUMP"); ?></p>
+	<p>
+	<?php
+	var_dump($_FILES['uploadedFile']['error']);
+	?> </p>
+	
+	<?php
+	//if (move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $target_file_name)) {}
+	if (move_uploaded_file($temporary_file, $target_file_name)) {
+		echo "File uploaded successfully - ".$_FILES["uploadedFile"]["tmp_name"]."\xA";
+		?>
+		
+		<?php
+		$file_cont =  file_get_contents($target_file_name);
+		print ("$file_cont");
+		//$fp = fopen($_FILES['uploadedFile']['tmp_name'], 'r');
+		//while (($line = fgets($fp)) !== false)) {
+		//	//echo "$line<br>";
+		//}
+		?>
+		<p>Click <a href="hello.php">here</a> to go back </p>
+		<?php
+
+	} else {
+		echo "ERROR ";
+		print ("File not uploaded");
+		?>
+		<p>Click <a href="hello.php">here</a> to go back </p>
+		<?php
+	}
+}
+		?>
