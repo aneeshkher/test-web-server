@@ -13,10 +13,10 @@ if (isset($_POST["submit"])) {
 	//if ($_FILES['uploadedFile']['name'] != "") {}
 	?>
 	<p> <?php echo "File type - ".$_FILES['uploadedFile']['type']."\xA"; ?> </p>
-	<p> <?php echo "File size - ".$_FILES['uploadedFile']['size']; ?> </p>
-	<p> <?php echo "File name - ".$_FILES['uploadedFile']['name']; ?> </p>
-	<p> <?php echo "File temp - ".$_FILES['uploadedFile']['tmp_name']; ?> </p>
-	<p> <?php echo "File err - ".$_FILES['uploadedFile']['error']; ?> </p>
+	<p> <?php //echo "File size - ".$_FILES['uploadedFile']['size']; ?> </p>
+	<p> <?php //echo "File name - ".$_FILES['uploadedFile']['name']; ?> </p>
+	<p> <?php //echo "File temp - ".$_FILES['uploadedFile']['tmp_name']; ?> </p>
+	<p> <?php //echo "File err - ".$_FILES['uploadedFile']['error']; ?> </p>
 	<?php
 	$temporary_file = $_FILES['uploadedFile']['tmp_name'];
 	print ("Target file name: $target_file_name");
@@ -24,13 +24,13 @@ if (isset($_POST["submit"])) {
 	<p><?php print ("VAR DUMP"); ?></p>
 	<p>
 	<?php
-	var_dump($_FILES['uploadedFile']['error']);
+	//var_dump($_FILES['uploadedFile']['error']);
 	?> </p>
 	
 	<?php
 	//if (move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $target_file_name)) {}
 	if (move_uploaded_file($temporary_file, $target_file_name)) {
-		echo "File uploaded successfully - ".$_FILES["uploadedFile"]["tmp_name"]."\xA";
+		//echo "File uploaded successfully - ".$_FILES["uploadedFile"]["tmp_name"]."\xA";
 		?>
 		
 		<?php
