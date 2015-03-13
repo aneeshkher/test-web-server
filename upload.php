@@ -33,6 +33,8 @@ if (isset($_POST["submit"])) {
 	
 	<?php
 	//if (move_uploaded_file($_FILES['uploadedFile']['tmp_name'], $target_file_name)) {}
+	$rowCount = 0;
+	$colCount = 0;
 	if (move_uploaded_file($temporary_file, $target_file_name)) {
 		//echo "File uploaded successfully - ".$_FILES["uploadedFile"]["tmp_name"]."\xA";
 		?>
@@ -62,15 +64,21 @@ if (isset($_POST["submit"])) {
 			<?php $first = fgetcsv($handle);?>
 			<tr>
 			<?php foreach ($first as $heading) {?>
+				<?php $colCount++; ?>
 				<th> <?php echo htmlspecialchars($heading);?> </th>
 			<?php } ?>
 			<?php while (($line = fgetcsv($handle)) !== false) { ?>
+				<?php $rowCount++;?>
 				<tr>
 					<?php foreach ($line as $element) { ?>
 						<td><?php echo htmlspecialchars($element); ?> </td>
 					<?php } ?>
 				</tr>
-			<?php } 	
+			<?php } ?>	
+			
+			<td colspan="<?php echo $colCount; ?>"><b>This table contains  <?php echo $rowCount ?> entries</b></td> 	
+			
+		<?php 
 		}
 		fclose($handle);
 		?>
