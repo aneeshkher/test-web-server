@@ -34,12 +34,45 @@ if (isset($_POST["submit"])) {
 		?>
 		
 		<?php
-		$file_cont =  file_get_contents($target_file_name);
-		print ("$file_cont");
-		//$fp = fopen($_FILES['uploadedFile']['tmp_name'], 'r');
-		//while (($line = fgets($fp)) !== false)) {
-		//	//echo "$line<br>";
-		//}
+		//$file_cont =  file_get_contents($target_file_name);
+		//print ("$file_cont");
+		$handle = fopen($target_file_name,'r');
+		$row = 1;
+		if ($handle) {
+			print("Inside file handle"); ?>
+			<html>
+			<head>
+			<style>
+				table, th, td {
+					border: 1px solid black;
+					border-collapse: collapse;
+				}
+				th, td {
+					padding: 5px;
+					text-align: left;
+				}
+			</style>
+			</head>
+
+			<body><table style="width:100%">
+			<?php $first = fgetcsv($handle);?>
+			<tr>
+			<?php foreach ($first as $heading) {?>
+				<th> <?php echo htmlspecialchars($heading);?> </th>
+			<?php } ?>
+			<?php while (($line = fgetcsv($handle)) !== false) { ?>
+				<tr>
+					<?php foreach ($line as $element) { ?>
+						<td><?php echo htmlspecialchars($element); ?> </td>
+					<?php } ?>
+				</tr>
+			<?php } 	
+		}
+		fclose($handle);
+		?>
+		</table></body></html>	
+		<?php 
+
 		?>
 		<p>Click <a href="hello.php">here</a> to go back </p>
 		<?php
