@@ -18,6 +18,10 @@ if (isset($_POST["submit"])) {
 	<p> <?php //echo "File temp - ".$_FILES['uploadedFile']['tmp_name']; ?> </p>
 	<p> <?php //echo "File err - ".$_FILES['uploadedFile']['error']; ?> </p>
 	<?php
+	$fileType = $_FILES['uploadedFile']['type'];
+	if ($fileType !== "application/x-csv") {
+		exit ("Please upload CSV File");
+	}
 	$temporary_file = $_FILES['uploadedFile']['tmp_name'];
 	print ("Target file name: $target_file_name");
 	?>
